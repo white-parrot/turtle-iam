@@ -1,6 +1,5 @@
 package rt.turtleIam.config;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,10 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Data
 public class TurtleUserDetailsService implements UserDetailsService {
 
     private final TurtleUserRepository tUserRepository;
+
+    public TurtleUserDetailsService(TurtleUserRepository tUserRepository) {
+        this.tUserRepository = tUserRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
