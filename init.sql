@@ -9,3 +9,8 @@ INSERT INTO users (username, password, enabled) VALUES ('user', '{noop}userPassw
 -- Insert authorities for that user
 INSERT INTO authorities (username, authority) VALUES ('admin', 'READ');
 INSERT INTO authorities (username, authority) VALUES ('admin', 'ADMIN');
+
+CREATE TABLE turtle_user (id BIGSERIAL PRIMARY KEY, email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, role VARCHAR(100) NOT NULL, active BOOLEAN NOT NULL);
+
+INSERT INTO turtle_user (email, password, role, active) VALUES ('admin@example.com', '{bcrypt}$2a$12$z41u6Xh0kiLi3EZAUje2feUnSGMefHvXF0q58Uo5FmfzvllILT8.m', 'ADMIN', true),
+                                                               ('user@example.com', '{noop}userPasswd', 'USER', true);

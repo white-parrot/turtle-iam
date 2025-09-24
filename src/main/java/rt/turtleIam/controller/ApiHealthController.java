@@ -1,13 +1,12 @@
-package rt.turtleIam.test;
+package rt.turtleIam.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
-public class TestController {
+public class ApiHealthController {
 
-    @RequestMapping("/health")
+    @RequestMapping("/private/health")
     public String test(){
         return "up";
     }
