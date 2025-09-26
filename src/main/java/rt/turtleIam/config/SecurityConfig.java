@@ -18,6 +18,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.sessionManagement(
+                sessionMgmtConfig -> sessionMgmtConfig.invalidSessionUrl("/invalidSession")
+                        .maximumSessions(1).maxSessionsPreventsLogin(true));
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(AbstractHttpConfigurer::disable);
         http.redirectToHttps(Customizer.withDefaults()).authorizeHttpRequests(request -> {
