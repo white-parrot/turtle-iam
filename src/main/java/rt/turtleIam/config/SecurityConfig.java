@@ -28,6 +28,9 @@ public class SecurityConfig {
                 httpBasicConfig.authenticationEntryPoint(
                         new CustomBasicAuthenticationEntryPoint())
         );
+        http.exceptionHandling(expHandelingConfig ->
+                expHandelingConfig.authenticationEntryPoint(
+                        new CustomBasicAuthenticationEntryPoint()));
         return http.build();
     }
 
