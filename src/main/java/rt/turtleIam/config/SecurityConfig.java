@@ -10,6 +10,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
+import rt.turtleIam.exception.CustomBasicAuthenticationEntryPoint;
 
 @Configuration
 public class SecurityConfig {
@@ -23,7 +24,10 @@ public class SecurityConfig {
             request.requestMatchers("/private/**").authenticated();
         });
         http.formLogin(form -> form.defaultSuccessUrl("/private/health", true));
-        http.httpBasic(Customizer.withDefaults());
+        http.httpBasic(httpBasicConfig ->
+                httpBasicConfig.authenticationEntryPoint(
+                        new CustomBasicAuthenticationEntryPoint())
+        );
         return http.build();
     }
 
