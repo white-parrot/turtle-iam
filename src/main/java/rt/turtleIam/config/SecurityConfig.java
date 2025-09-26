@@ -10,6 +10,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
+import rt.turtleIam.exception.CustomAccessDeniedHandler;
 import rt.turtleIam.exception.CustomBasicAuthenticationEntryPoint;
 
 @Configuration
@@ -28,9 +29,8 @@ public class SecurityConfig {
                 httpBasicConfig.authenticationEntryPoint(
                         new CustomBasicAuthenticationEntryPoint())
         );
-        http.exceptionHandling(expHandelingConfig ->
-                expHandelingConfig.authenticationEntryPoint(
-                        new CustomBasicAuthenticationEntryPoint()));
+        http.exceptionHandling(expHandlingConfig ->
+                expHandlingConfig.accessDeniedHandler(new CustomAccessDeniedHandler()));
         return http.build();
     }
 
